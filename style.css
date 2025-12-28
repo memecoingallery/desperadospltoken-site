@@ -1,6 +1,4 @@
-/* ---- Dawn background + rising sun animation ----
-   Adjusted for centered layout and nice socials layout.
-*/
+/* Dawn background + rising sun animation + centered layout */
 
 /* Reset / base */
 * { box-sizing: border-box; }
@@ -58,13 +56,22 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
   z-index: 2;
 }
 .logo {
-  width:72px;
-  height:auto;
   display:block;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
   border-radius:12px;
-  padding:8px;
+  padding:6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+.logo-centered {
+  display: block;
+  margin: 0 auto 18px auto;
+  max-width: 240px;
+  width: 40vw;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.02);
+  padding: 6px;
 }
 .site-title {
   margin:0;
@@ -78,7 +85,7 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  min-height: calc(100vh - 120px); /* leaves space for header/footer */
+  min-height: calc(100vh - 120px);
   padding: 40px 20px;
   z-index: 1;
 }
@@ -94,19 +101,8 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.25);
 }
-
-/* Title & description */
-.hero-title {
-  margin: 0 0 12px 0;
-  font-size: 28px;
-  color: #fff;
-}
-.description {
-  margin: 0 0 24px 0;
-  line-height: 1.6;
-  font-size: 17px;
-  opacity: 0.95;
-}
+.hero-title { margin: 0 0 12px 0; font-size: 28px; color: #fff; }
+.description { margin: 0 0 24px 0; line-height: 1.6; font-size: 17px; opacity: 0.95; }
 
 /* Social links centered and styled */
 .links {
@@ -142,9 +138,9 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
   text-align:center;
 }
 
-/* Responsiveness */
+/* Responsive */
 @media (max-width:600px) {
-  .logo { width:56px; padding:6px; }
+  .logo-centered { max-width: 160px; width: 48vw; padding: 4px; }
   .hero-title { font-size:22px; }
   .description { font-size:15px; }
   .sun { width:36vmax; height:36vmax; }
