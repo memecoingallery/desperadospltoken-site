@@ -22,20 +22,22 @@
     <div class="sun"></div>
   </div>
 
-  <header class="site-header">
-    <a class="logo-link" href="/" aria-label="Desperado home">
-      <!-- Prefer SVG for crispness; fallback to PNG if needed -->
-      <img src="images/logo.svg" alt="Desperado" class="logo" />
-    </a>
+  <header class="site-header" role="banner">
+    <!-- Use PNG as provided in repo; SVG will be used if present -->
+    <picture class="logo-picture" aria-hidden="false">
+      <source srcset="images/logo.svg" type="image/svg+xml">
+      <img src="images/logo.png" alt="Desperado logo" class="logo logo-centered" width="240" height="240" />
+    </picture>
+
     <h1 class="site-title">Desperado SPL Token</h1>
   </header>
 
   <main class="content container" role="main">
-    <section class="hero">
-      <h2 class="hero-title">For degens who choose conviction over caution</h2>
+    <section class="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title" class="hero-title">For degens who choose conviction over caution</h2>
 
       <p class="description">
-        A desperado is someone who acts confidently and does everything imaginable to turn their bad situation into a successful outcome for themselves, their family, and their surroundings. It is a cultural token that reflects the psychology of degens, who understand that in crypto caution is optional and conviction is mandatory. For this reason: <strong>No Risk, No Fun.</strong>
+        <strong>A desperado is someone who acts confidently and does everything imaginable to turn their bad situation into a successful outcome for themselves, their family, and their surroundings.</strong>
       </p>
 
       <div class="links" role="navigation" aria-label="Social links">
@@ -46,7 +48,7 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <small>© Desperado</small>
   </footer>
 </body>
