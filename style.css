@@ -1,163 +1,193 @@
+/* style.css — Desperado SPL token Website
+   - Orange/red sunset background
+   - Rising sun
+   - Silhouetted cowboy on horse riding back-and-forth
+*/
+
 :root{
-  --sky-top: #87CEEB;
-  --sky-bottom: #E6F3FF;
-  --steppe: #d6c08a;
-  --grass: #bdb16a;
-  --accent: #111;
-  --max-width: 1100px;
+  --bg-top: #ff7a18;   /* bright orange */
+  --bg-mid: #ff4e00;   /* deep orange */
+  --bg-bottom: #8b0f00;/* dark red */
+  --text: #111;
+  --muted: rgba(255,255,255,0.85);
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color:var(--accent);
-  background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-bottom) 60%, var(--steppe) 60%, var(--grass) 100%);
-  overflow-x:hidden;
-}
+html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);}
 
-/* Background layer that contains clouds and silhouettes */
-.background{
-  position:fixed;
-  left:0; right:0; top:0; bottom:0;
-  z-index:0;
-  pointer-events:none;
-  overflow:hidden;
-}
-
-/* Moving clouds using CSS pseudo-graphics */
-.clouds{
-  position:absolute;
-  left:-40%;
-  top:6%;
-  right:-40%;
-  height:26vh;
-  background:
-    radial-gradient(closest-side, rgba(255,255,255,0.85) 20%, rgba(255,255,255,0.35) 60%, transparent 61%) 10% 50% / 20% 60% no-repeat,
-    radial-gradient(closest-side, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.35) 55%, transparent 56%) 40% 60% / 22% 70% no-repeat,
-    radial-gradient(closest-side, rgba(255,255,255,0.9) 18%, rgba(255,255,255,0.35) 55%, transparent 56%) 70% 40% / 24% 60% no-repeat;
-  animation: clouds-move 30s linear infinite;
-  opacity:0.9;
-  filter: blur(8px);
-}
-
-@keyframes clouds-move{
-  0%{ transform: translateX(-10vw) }
-  100%{ transform: translateX(10vw) }
-}
-
-/* Silhouette pieces */
-.silhouette{
-  position:absolute;
-  bottom:8vh;
-  width:20vw;
-  max-width:320px;
-  min-width:160px;
-  height:auto;
-  z-index:1;
-  will-change:transform;
-  opacity:0.98;
-  /* small bob to mimic motion */
-  animation: bob 0.9s ease-in-out infinite;
-}
-
-/* Slight bobbing independent of travel */
-@keyframes bob{
-  0%{ transform: translateY(0) }
-  50%{ transform: translateY(-6px) }
-  100%{ transform: translateY(0) }
-}
-
-/* LTR instance: moves left -> right */
-.silhouette.ltr{
-  left:-40vw;
-  animation-name: ride-ltr, bob;
-  animation-duration: 12s, 0.9s;
-  animation-iteration-count: infinite, infinite;
-  animation-timing-function: linear, ease-in-out;
-  animation-fill-mode: forwards;
-  /* ensure both animations applied (two listed in shorthand) */
-}
-
-/* RTL instance: mirrored and delayed so it alternates */
-.silhouette.rtl{
-  left:120vw;
-  transform-origin: center;
-  transform: scaleX(-1);
-  animation-name: ride-rtl, bob;
-  animation-duration: 12s, 0.9s;
-  animation-iteration-count: infinite, infinite;
-  animation-timing-function: linear, ease-in-out;
-  animation-fill-mode: forwards;
-  animation-delay: 6s, 0s; /* start half-period later */
-}
-
-/* Travel keyframes move across a wide viewport (vw) so it works on all sizes */
-@keyframes ride-ltr{
-  0%{ transform: translateX(-40vw) scaleX(1) }
-  45%{ transform: translateX(48vw) scaleX(1) }
-  100%{ transform: translateX(140vw) scaleX(1) }
-}
-@keyframes ride-rtl{
-  0%{ transform: translateX(140vw) scaleX(-1) }
-  45%{ transform: translateX(48vw) scaleX(-1) }
-  100%{ transform: translateX(-40vw) scaleX(-1) }
-}
-
-/* Content sits above animated background */
-.content{
-  position:relative;
-  z-index:3;
-  max-width:var(--max-width);
-  margin:0 auto;
-  padding:5vh 20px;
-  text-align:center;
-}
-
-/* Header and socials */
+/* Header with links — kept top and visible */
 .site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin-bottom:3vh;
+  padding:12px 20px;
+  z-index:40;
+  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+  backdrop-filter: blur(4px);
 }
-.site-header h1{
-  font-size:1.25rem;
-  margin:0;
-  letter-spacing:0.5px;
-}
-.socials a{
-  display:inline-block;
-  margin-left:10px;
-  padding:8px 10px;
-  color:var(--accent);
-  background:rgba(255,255,255,0.7);
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:600;
-  transition:transform .15s ease, background .15s;
-}
-.socials a:hover{ transform:translateY(-3px); background:rgba(255,255,255,0.95); }
 
-/* Hero */
-.hero h2{ font-size:2rem; margin:0 0 0.25rem 0; }
-.hero p{ margin:0; opacity:0.9; }
+.site-header .brand h1{
+  margin:0;
+  font-size:18px;
+  color:#fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* keep link placement (top-right) */
+.site-nav ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.site-nav a{
+  color:var(--muted);
+  text-decoration:none;
+  padding:6px 8px;
+  border-radius:6px;
+  font-weight:600;
+  opacity:.95;
+}
+.site-nav a:hover{background:rgba(255,255,255,0.06);}
+
+/* Hero / scene */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-top:84px; /* leave space for header */
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(closest-side at 50% 80%, rgba(255,255,255,0.04), transparent 40%),
+    linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 50%, var(--bg-bottom) 100%);
+}
+
+/* sky wrapper to host sun, horizon and rider */
+.sky{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:1;
+}
+
+/* sun: a glowing radial circle — animated to 'rise' slightly */
+.sun{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%) translateY(40vh);
+  width:32vmin;
+  height:32vmin;
+  border-radius:50%;
+  background: radial-gradient(circle at 35% 35%, #fff8c8 0%, #ffd08a 20%, #ffab3d 45%, rgba(255,255,255,0) 55%);
+  box-shadow: 0 0 80px 28px rgba(255,140,0,0.15), 0 10px 60px rgba(139,15,0,0.3);
+  filter: saturate(1.1);
+  animation: sun-rise 6s ease-in-out forwards;
+  z-index:2;
+  opacity:0.95;
+}
+
+/* small slow shimmer for sun */
+@keyframes sun-rise {
+  0% { transform: translateX(-50%) translateY(60vh) scale(.9); opacity:0; }
+  40% { opacity:1; }
+  100% { transform: translateX(-50%) translateY(8vh) scale(1); opacity:1; }
+}
+
+/* horizon (dark ground shape) */
+.horizon{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:26vh;
+  background: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.35) 100%);
+  transform: skewY(-2deg);
+  z-index:5;
+}
+
+/* rider wrapper controls the motion of the silhouette */
+.rider-wrap{
+  position:absolute;
+  bottom:18vh; /* sits above horizon */
+  left:-30%;
+  width:60vmax;
+  height:30vmin;
+  pointer-events:none;
+  z-index:10;
+  display:flex;
+  align-items:flex-end;
+  will-change:transform;
+  animation: ride 8s ease-in-out infinite alternate;
+}
+
+/* rider svg scales to fit */
+.rider{
+  width:18vmax;
+  height:auto;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+  transform-origin:center bottom;
+}
+
+/* ride animation: horizontal movement back and forth */
+@keyframes ride {
+  0%, 100% { transform: translateX(-10vw) translateY(0) scaleX(1) }
+  25%  { transform: translateX(30vw) translateY(-1vh) scaleX(1.02) }
+  50%  { transform: translateX(60vw) translateY(0) scaleX(1) }
+  75%  { transform: translateX(30vw) translateY(1vh) scaleX(.98) }
+}
+
+/* Hero content area (text) placed visually above horizon */
+.hero-content{
+  position:relative;
+  z-index:20;
+  text-align:center;
+  padding:48px 20px 120px;
+  color:var(--muted);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  max-width:960px;
+}
+
+.hero-content h2{
+  margin:0 0 10px;
+  font-size: clamp(28px, 5vw, 48px);
+  letter-spacing:1px;
+  color:#fff;
+}
+.hero-content .description{
+  margin:10px auto 4px;
+  font-size:clamp(14px, 2.2vw, 18px);
+  max-width:760px;
+  color: #fffef8;
+  opacity:0.95;
+}
+.hero-content .sub{
+  margin-top:12px;
+  color:rgba(255,255,255,0.85);
+  font-weight:600;
+}
 
 /* Footer */
 .site-footer{
   position:relative;
-  z-index:3;
+  z-index:30;
+  padding:24px 20px;
   text-align:center;
-  padding:3vh 0;
-  color:rgba(0,0,0,0.6);
+  color:rgba(255,255,255,0.8);
+  margin-top:40px;
 }
 
-/* Make sure SVG scales and stays crisp */
-.silhouette svg{ display:block; width:100%; height:auto; }
-
-/* Accessibility: reduce motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .silhouette, .clouds { animation: none; transform:none; left: 10%; }
+/* Small screens: scale down rider and ensure nav stacks if needed */
+@media (max-width:640px){
+  .site-nav ul{gap:10px;}
+  .rider{ width:34vmax; }
+  .rider-wrap{ bottom:14vh; }
+  .sun{ width:44vmin; height:44vmin; }
 }
