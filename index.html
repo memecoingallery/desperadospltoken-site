@@ -12,7 +12,7 @@
       <h1>Desperado</h1>
     </div>
 
-    <!-- Navigation / social links (kept top, social links restored) -->
+    <!-- Navigation / social links -->
     <nav class="site-nav" aria-label="Main navigation">
       <ul class="main-links">
         <li><a href="#">Home</a></li>
@@ -23,22 +23,19 @@
       </ul>
 
       <ul class="social-links" aria-label="Social links">
-        <li><a href="https://t.me/DESPERADO_Solana" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</a></li>
-        <li><a href="https://x.com/MemecoinGallery" target="_blank" rel="noopener noreferrer" aria-label="X">X</a></li>
+        <!-- hrefs are explicit absolute URLs and IDs are used so the runtime script can enforce them -->
+        <li><a id="social-telegram" href="https://t.me/DESPERADO_Solana" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</a></li>
+        <li><a id="social-x" href="https://x.com/MemecoinGallery" target="_blank" rel="noopener noreferrer" aria-label="X">X</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="hero">
     <div class="sky" aria-hidden="true">
-      <!-- sun -->
       <div class="sun"></div>
-
-      <!-- ground silhouette (horizon) -->
       <div class="horizon"></div>
 
-      <!-- Silhouette rider (SVG) -->
-      <div class="rider-wrap">
+      <div class="rider-wrap" aria-hidden="true">
         <svg class="rider" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true">
           <g fill="#000" stroke="none" transform="translate(0,8) scale(1.1)">
             <ellipse cx="70" cy="40" rx="40" ry="18" />
@@ -68,7 +65,52 @@
   </footer>
 
   <script>
+    // Ensure year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Enforce the canonical social targets at runtime to avoid accidental rewrites
+    (function enforceSocialLinks() {
+      const SOCIALS = {
+        telegram: 'https://t.me/DESPERADO_Solana',
+        x: 'https://x.com/MemecoinGallery'
+      };
+
+      const t = document.getElementById('social-telegram');
+      const x = document.getElementById('social-x');
+
+      if (t) {
+        t.href = SOCIALS.telegram;
+        t.target = '_blank';
+        t.rel = 'noopener noreferrer';
+        t.setAttribute('aria-label', 'Telegram');
+      }
+      if (x) {
+        x.href = SOCIALS.x;
+        x.target = '_blank';
+        x.rel = 'noopener noreferrer';
+        x.setAttribute('aria-label', 'X');
+      }
+
+      // Optional safety: if a click would open a different host, open canonical link instead
+      function guard(e, canonical) {
+        try {
+          const href = e.currentTarget.getAttribute('href');
+          const url = new URL(href, location.href);
+          // If host differs from canonical host or href was modified, force open canonical
+          if (!href || url.href !== canonical) {
+            e.preventDefault();
+            window.open(canonical, '_blank', 'noopener,noreferrer');
+          }
+        } catch (err) {
+          // on parse error, just open canonical
+          e.preventDefault();
+          window.open(canonical, '_blank', 'noopener,noreferrer');
+        }
+      }
+
+      if (t) t.addEventListener('click', (e) => guard(e, SOCIALS.telegram));
+      if (x) x.addEventListener('click', (e) => guard(e, SOCIALS.x));
+    })();
   </script>
 </body>
 </html>
