@@ -1,9 +1,7 @@
 /* Dawn background + rising sun animation + centered layout */
-
 /* Reset / base */
 * { box-sizing: border-box; }
 html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #111; }
-
 /* Sky container sits behind everything */
 .sky {
   position: fixed;
@@ -21,132 +19,63 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
   background: radial-gradient(60% 30% at 50% 70%, rgba(255,200,120,0.35), transparent 40%);
   pointer-events: none;
 }
-
-/* Sun element */
-.sun {
+/* Steppe/desert ground layer */
+.steppe {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -18vh;
-  width: 22vmax;
-  height: 22vmax;
-  max-width: 360px;
-  max-height: 360px;
-  background: radial-gradient(circle at 30% 30%, #FFF6D8 0%, #FFD27A 20%, #FF8B3D 60%, rgba(255,120,60,0.9) 100%);
-  border-radius: 50%;
-  filter: blur(6px) saturate(120%);
-  box-shadow: 0 40px 80px rgba(255,90,30,0.25), inset 0 -12px 30px rgba(255,140,60,0.35);
-  animation: sun-rise 20s ease-in-out infinite;
-  opacity: 0.98;
+  left: 0; right: 0; bottom: 0;
+  height: 25vh;
+  background: linear-gradient(180deg, rgba(139, 90, 43, 0.4) 0%, rgba(101, 67, 33, 0.7) 40%, rgba(80, 50, 20, 0.9) 100%);
+  pointer-events: none;
 }
-@keyframes sun-rise {
-  0%   { transform: translateX(-50%) translateY(30vh) scale(0.95); opacity: 0.0; filter: blur(10px) saturate(80%); }
-  10%  { opacity: 1; }
-  50%  { transform: translateX(-50%) translateY(-6vh) scale(1); filter: blur(4px) saturate(120%); }
-  90%  { opacity: 1; }
-  100% { transform: translateX(-50%) translateY(30vh) scale(0.95); opacity: 0.0; filter: blur(10px) saturate(80%); }
+.steppe::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(60, 40, 20, 0.8) 20%, rgba(60, 40, 20, 0.8) 80%, transparent 100%);
 }
-
-/* Header */
-.site-header {
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:22px;
-  z-index: 2;
-}
-.logo {
-  display:block;
-  background: rgba(255,255,255,0.02);
-  border-radius:12px;
-  padding:6px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-}
-.logo-centered {
-  display: block;
-  margin: 0 auto 18px auto;
-  max-width: 240px;
-  width: 40vw;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-  background: rgba(255,255,255,0.02);
-  padding: 6px;
-}
-.site-title {
-  margin:0;
-  font-size:18px;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
-}
-
-/* Centered container for main content */
-.container {
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  min-height: calc(100vh - 120px);
-  padding: 40px 20px;
+/* Cowboy on horse silhouette */
+.cowboy {
+  position: absolute;
+  bottom: 8vh;
+  left: -200px;
+  width: 150px;
+  height: 100px;
   z-index: 1;
+@@ -52,24 +53,19 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
+
+@keyframes gallop {
+  0% {
+    left: -200px;
+    transform: scaleX(1);
+    transform: translateX(0) scaleX(1);
+  }
+  45% {
+    left: calc(100% + 200px);
+    transform: scaleX(1);
+    transform: translateX(calc(100vw + 200px)) scaleX(1);
+  }
+  50% {
+    left: calc(100% + 200px);
+    transform: scaleX(-1);
+    transform: translateX(calc(100vw + 200px)) scaleX(-1);
+  }
+  95% {
+    left: -200px;
+    transform: scaleX(-1);
+    transform: translateX(0) scaleX(-1);
+  }
+  100% {
+    left: -200px;
+    transform: scaleX(1);
+    transform: translateX(0) scaleX(1);
+  }
 }
 
-/* Hero area */
-.hero {
-  max-width: 880px;
-  text-align: center;
-  color: rgba(255,255,255,0.95);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-  padding: 36px 28px;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-}
-.hero-title { margin: 0 0 12px 0; font-size: 28px; color: #fff; }
-.description { margin: 0 0 24px 0; line-height: 1.6; font-size: 17px; opacity: 0.95; }
-
-/* Social links centered and styled */
-.links {
-  display:flex;
-  justify-content:center;
-  gap: 14px;
-  flex-wrap:wrap;
-  margin-top: 8px;
-}
-.links a {
-  display:inline-block;
-  text-decoration:none;
-  color: #FFFAF6;
-  background: rgba(0,0,0,0.14);
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight:600;
-  transition: transform .14s ease, background .14s ease;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-}
-.links a:hover,
-.links a:focus {
-  transform: translateY(-4px);
-  background: rgba(0,0,0,0.22);
-  outline: none;
-}
-
-/* Footer */
-.site-footer {
-  padding: 22px;
-  color: rgba(255,255,255,0.8);
-  font-size: 13px;
-  text-align:center;
-}
-
-/* Responsive */
-@media (max-width:600px) {
-  .logo-centered { max-width: 160px; width: 48vw; padding: 4px; }
-  .hero-title { font-size:22px; }
-  .description { font-size:15px; }
-  .sun { width:36vmax; height:36vmax; }
-}
-
+@@ -202,5 +198,5 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .sun { animation: none; transform: translateX(-50%) translateY(-6vh); }
+  .cowboy { animation: none; left: 50%; transform: translateX(-50%); }
+  .cowboy { animation: none; left: 50%; transform: translateX(-50%) scaleX(1); }
 }
