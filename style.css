@@ -1,6 +1,6 @@
 /* style.css — Desperado SPL token Website
    - Orange/red sunset background
-   - Arizing sun
+   - Rising sun
    - Silhouetted cowboy on horse riding back-and-forth
 */
 
@@ -82,7 +82,7 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
 .sun{
   position:absolute;
   left:50%;
-  transform:translateX(-50%) translateY(40vh) scale(1);
+  transform:translateX(-50%) translateY(40vh);
   width:32vmin;
   height:32vmin;
   border-radius:50%;
@@ -138,11 +138,10 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
 
 /* ride animation: horizontal movement back and forth */
 @keyframes ride {
-  0%   { transform: translateX(-10vw) translateY(0) scaleX(1) }
+  0%, 100% { transform: translateX(-10vw) translateY(0) scaleX(1) }
   25%  { transform: translateX(30vw) translateY(-1vh) scaleX(1.02) }
   50%  { transform: translateX(60vw) translateY(0) scaleX(1) }
   75%  { transform: translateX(30vw) translateY(1vh) scaleX(.98) }
-  100% { transform: translateX(-10vw) translateY(0) scaleX(1) }
 }
 
 /* Hero content area (text) placed visually above horizon */
@@ -187,7 +186,7 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
 
 /* Small screens: scale down rider and ensure nav stacks if needed */
 @media (max-width:640px){
-  .site-nav ul{gap:10px}
+  .site-nav ul{gap:10px;}
   .rider{ width:34vmax; }
   .rider-wrap{ bottom:14vh; }
   .sun{ width:44vmin; height:44vmin; }
