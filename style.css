@@ -22,6 +22,53 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
   pointer-events: none;
 }
 
+/* Steppe/desert ground layer */
+.steppe {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 25vh;
+  background: linear-gradient(180deg, rgba(139, 90, 43, 0.4) 0%, rgba(101, 67, 33, 0.7) 40%, rgba(80, 50, 20, 0.9) 100%);
+  pointer-events: none;
+}
+.steppe::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(60, 40, 20, 0.8) 20%, rgba(60, 40, 20, 0.8) 80%, transparent 100%);
+}
+
+/* Cowboy on horse silhouette */
+.cowboy {
+  position: absolute;
+  bottom: 8vh;
+  left: -200px;
+  width: 150px;
+  height: 100px;
+  z-index: 1;
+  animation: gallop 15s linear infinite;
+  opacity: 0.85;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes gallop {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  45% {
+    transform: translateX(calc(100vw + 200px)) scaleX(1);
+  }
+  50% {
+    transform: translateX(calc(100vw + 200px)) scaleX(-1);
+  }
+  95% {
+    transform: translateX(0) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+}
+
 /* Sun element */
 .sun {
   position: absolute;
@@ -144,9 +191,12 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
   .hero-title { font-size:22px; }
   .description { font-size:15px; }
   .sun { width:36vmax; height:36vmax; }
+  .cowboy { width: 100px; height: 67px; bottom: 6vh; }
+  .steppe { height: 20vh; }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .sun { animation: none; transform: translateX(-50%) translateY(-6vh); }
+  .cowboy { animation: none; left: 50%; transform: translateX(-50%) scaleX(1); }
 }
