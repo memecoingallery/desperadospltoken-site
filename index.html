@@ -12,46 +12,44 @@
       <h1>Desperado</h1>
     </div>
 
-    <!-- Keep nav link placement as-is (top-right) -->
+    <!-- Navigation / social links (kept top, social links restored) -->
     <nav class="site-nav" aria-label="Main navigation">
-      <ul>
+      <ul class="main-links">
         <li><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Token</a></li>
         <li><a href="#">Docs</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
+
+      <ul class="social-links" aria-label="Social links">
+        <li><a href="https://t.me/desperadospltoken" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</a></li>
+        <li><a href="https://twitter.com/desperadospl" target="_blank" rel="noopener noreferrer" aria-label="Twitter">Twitter</a></li>
+      </ul>
     </nav>
   </header>
 
   <main class="hero">
-    <div class="sky">
+    <div class="sky" aria-hidden="true">
       <!-- sun -->
-      <div class="sun" aria-hidden="true"></div>
+      <div class="sun"></div>
 
       <!-- ground silhouette (horizon) -->
-      <div class="horizon" aria-hidden="true"></div>
+      <div class="horizon"></div>
 
-      <!-- Simple SVG silhouette of a cowboy on a horse — animated to ride back and forth -->
-      <div class="rider-wrap" aria-hidden="true">
+      <!-- Silhouette rider (SVG) -->
+      <div class="rider-wrap">
         <svg class="rider" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true">
-          <!-- A simplified stylized silhouette (scales responsively) -->
           <g fill="#000" stroke="none" transform="translate(0,8) scale(1.1)">
-            <!-- Horse body -->
             <ellipse cx="70" cy="40" rx="40" ry="18" />
-            <!-- Horse head -->
             <path d="M110 26 q18 -6 24 0 q2 6 -6 10 q-10 6 -18 4 q-10 -2 -8 -14 z" />
-            <!-- Horse legs -->
             <rect x="38" y="52" width="4" height="20" rx="1" />
             <rect x="54" y="52" width="4" height="20" rx="1" />
             <rect x="92" y="52" width="4" height="20" rx="1" />
             <rect x="108" y="52" width="4" height="20" rx="1" />
-            <!-- Rider -->
             <circle cx="50" cy="18" r="6" />
             <rect x="44" y="24" width="12" height="10" rx="2" />
-            <!-- Lasso/arm -->
             <path d="M52 22 q12 -12 26 -6" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Saddle area / small details -->
             <rect x="58" y="30" width="16" height="6" rx="2" />
           </g>
         </svg>
@@ -70,7 +68,6 @@
   </footer>
 
   <script>
-    // lightweight: set current year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
