@@ -7,83 +7,53 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background">
-    <!-- moving sun/clouds for depth -->
-    <div class="clouds" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="brand"><h1>Desperados PL Token</h1></div>
+    <nav class="site-nav" aria-label="Social links">
+      <ul>
+        <li><a href="https://x.com/MemecoinGallery" target="_blank" rel="noopener" aria-label="X (MemecoinGallery)">X</a></li>
+        <li><a href="https://t.me/DESPERADO_Solana" target="_blank" rel="noopener" aria-label="Telegram (DESPERADO_Solana)">Telegram</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- two silhouette instances to simulate back-and-forth with correct facing -->
-    <!-- Left-to-right -->
-    <div class="silhouette ltr" aria-hidden="true">
-<svg viewBox="0 0 400 180" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="cowboy on horse silhouette">
-        <g fill="#000">
-          <!-- horse body -->
-          <ellipse cx="160" cy="100" rx="90" ry="34"/>
-          <!-- horse back / saddle area (slight bump) -->
-          <ellipse cx="155" cy="86" rx="28" ry="10"/>
-          <!-- horse head + neck -->
-          <polygon points="230,80 270,70 262,86 240,92" />
-          <ellipse cx="240" cy="78" rx="18" ry="12"/>
-          <!-- legs (stylized) -->
-          <rect x="120" y="115" width="8" height="40" rx="2" />
-          <rect x="150" y="115" width="8" height="44" rx="2" />
-          <rect x="190" y="115" width="8" height="40" rx="2" />
-          <rect x="220" y="115" width="8" height="44" rx="2" />
-          <!-- tail -->
-          <path d="M105 94 q-18 10 -26 6 q12 8 22 12 q6 -10 4 -18" />
-          <!-- rider -->
-          <circle cx="160" cy="58" r="12" />
-          <rect x="150" y="68" width="18" height="26" rx="3" />
-          <!-- cowboy hat -->
-          <path d="M144 52 q18 -12 30 -2 q-6 0 -22 6 q-18 0 -8 -4" />
-          <!-- ground shadow (subtle) -->
-          <ellipse cx="160" cy="158" rx="110" ry="18" fill="#000" opacity="0.06"/>
-        </g>
-      </svg>
+  <section class="hero">
+    <div class="sky">
+      <div class="sun" aria-hidden="true"></div>
+      <div class="horizon" aria-hidden="true"></div>
+      <div class="rider-wrap" aria-hidden="true">
+        <svg class="rider" viewBox="0 0 400 180" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="cowboy on horse silhouette">
+          <g fill="#000">
+            <ellipse cx="160" cy="100" rx="90" ry="34"/>
+            <ellipse cx="155" cy="86" rx="28" ry="10"/>
+            <polygon points="230,80 270,70 262,86 240,92" />
+            <ellipse cx="240" cy="78" rx="18" ry="12"/>
+            <rect x="120" y="115" width="8" height="40" rx="2" />
+            <rect x="150" y="115" width="8" height="44" rx="2" />
+            <rect x="190" y="115" width="8" height="40" rx="2" />
+            <rect x="220" y="115" width="8" height="44" rx="2" />
+            <path d="M105 94 q-18 10 -26 6 q12 8 22 12 q6 -10 4 -18" />
+            <circle cx="160" cy="58" r="12" />
+            <rect x="150" y="68" width="18" height="26" rx="3" />
+            <path d="M144 52 q18 -12 30 -2 q-6 0 -22 6 q-18 0 -8 -4" />
+            <ellipse cx="160" cy="158" rx="110" ry="18" fill="#000" opacity="0.06"/>
+          </g>
+        </svg>
+      </div>
     </div>
 
-    <!-- Right-to-left (mirrored) - delayed so the two alternate -->
-    <div class="silhouette rtl" aria-hidden="true">
-<svg viewBox="0 0 400 180" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="cowboy on horse silhouette mirrored">
-        <g fill="#000">
-          <ellipse cx="160" cy="100" rx="90" ry="34"/>
-          <ellipse cx="155" cy="86" rx="28" ry="10"/>
-          <polygon points="230,80 270,70 262,86 240,92" />
-          <ellipse cx="240" cy="78" rx="18" ry="12"/>
-          <rect x="120" y="115" width="8" height="40" rx="2" />
-          <rect x="150" y="115" width="8" height="44" rx="2" />
-          <rect x="190" y="115" width="8" height="40" rx="2" />
-          <rect x="220" y="115" width="8" height="44" rx="2" />
-          <path d="M105 94 q-18 10 -26 6 q12 8 22 12 q6 -10 4 -18" />
-          <circle cx="160" cy="58" r="12" />
-          <rect x="150" y="68" width="18" height="26" rx="3" />
-          <path d="M144 52 q18 -12 30 -2 q-6 0 -22 6 q-18 0 -8 -4" />
-          <ellipse cx="160" cy="158" rx="110" ry="18" fill="#000" opacity="0.06"/>
-        </g>
-      </svg>
+    <div class="hero-content">
+      <h2>Welcome to the West</h2>
+      <p class="description">A Desperado is someone who acts accordingly to improve the circumstances of himself, his family and his environment</p>
+      <p class="sub">Ride with us across the digital frontier.</p>
     </div>
-  </div>
-
-  <main class="content">
-    <header class="site-header">
-      <h1>Desperados PL Token</h1>
-      <nav class="socials" aria-label="Social links">
-<a href="https://x.com/MemecoinGallery" target="_blank" rel="noopener" aria-label="X (MemecoinGallery)">X</a>
-<a href="https://t.me/DESPERADO_Solana" target="_blank" rel="noopener" aria-label="Telegram (DESPERADO_Solana)">Telegram</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <h2>Welcome to the Steppe</h2>
-      <p>Silhouette cowboy riding across the plains — animated background, lightweight and CSS-driven.</p>
-    </section>
-  </main>
+  </section>
 
   <footer class="site-footer">
     <small>&copy; <span id="year"></span> Desperados PL Token</small>
   </footer>
 
   <script>
-    // small, unobtrusive: set current year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
