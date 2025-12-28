@@ -1,81 +1,163 @@
-/* Dawn background + rising sun animation + centered layout */
-/* Reset / base */
-* { box-sizing: border-box; }
-html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #111; }
-/* Sky container sits behind everything */
-.sky {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, #FF6A00 0%, #FF3B00 40%, #9B1F00 100%);
-  background-size: cover;
-  overflow: hidden;
-}
-.sky::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 50%;
-  background: radial-gradient(60% 30% at 50% 70%, rgba(255,200,120,0.35), transparent 40%);
-  pointer-events: none;
-}
-/* Steppe/desert ground layer */
-.steppe {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 25vh;
-  background: linear-gradient(180deg, rgba(139, 90, 43, 0.4) 0%, rgba(101, 67, 33, 0.7) 40%, rgba(80, 50, 20, 0.9) 100%);
-  pointer-events: none;
-}
-.steppe::before {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent 0%, rgba(60, 40, 20, 0.8) 20%, rgba(60, 40, 20, 0.8) 80%, transparent 100%);
-}
-/* Cowboy on horse silhouette */
-.cowboy {
-  position: absolute;
-  bottom: 8vh;
-  left: -200px;
-  width: 150px;
-  height: 100px;
-  z-index: 1;
-@@ -52,24 +53,19 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
-
-@keyframes gallop {
-  0% {
-    left: -200px;
-    transform: scaleX(1);
-    transform: translateX(0) scaleX(1);
-  }
-  45% {
-    left: calc(100% + 200px);
-    transform: scaleX(1);
-    transform: translateX(calc(100vw + 200px)) scaleX(1);
-  }
-  50% {
-    left: calc(100% + 200px);
-    transform: scaleX(-1);
-    transform: translateX(calc(100vw + 200px)) scaleX(-1);
-  }
-  95% {
-    left: -200px;
-    transform: scaleX(-1);
-    transform: translateX(0) scaleX(-1);
-  }
-  100% {
-    left: -200px;
-    transform: scaleX(1);
-    transform: translateX(0) scaleX(1);
-  }
+:root{
+  --sky-top: #87CEEB;
+  --sky-bottom: #E6F3FF;
+  --steppe: #d6c08a;
+  --grass: #bdb16a;
+  --accent: #111;
+  --max-width: 1100px;
 }
 
-@@ -202,5 +198,5 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
-/* Reduced motion */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--accent);
+  background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-bottom) 60%, var(--steppe) 60%, var(--grass) 100%);
+  overflow-x:hidden;
+}
+
+/* Background layer that contains clouds and silhouettes */
+.background{
+  position:fixed;
+  left:0; right:0; top:0; bottom:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* Moving clouds using CSS pseudo-graphics */
+.clouds{
+  position:absolute;
+  left:-40%;
+  top:6%;
+  right:-40%;
+  height:26vh;
+  background:
+    radial-gradient(closest-side, rgba(255,255,255,0.85) 20%, rgba(255,255,255,0.35) 60%, transparent 61%) 10% 50% / 20% 60% no-repeat,
+    radial-gradient(closest-side, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.35) 55%, transparent 56%) 40% 60% / 22% 70% no-repeat,
+    radial-gradient(closest-side, rgba(255,255,255,0.9) 18%, rgba(255,255,255,0.35) 55%, transparent 56%) 70% 40% / 24% 60% no-repeat;
+  animation: clouds-move 30s linear infinite;
+  opacity:0.9;
+  filter: blur(8px);
+}
+
+@keyframes clouds-move{
+  0%{ transform: translateX(-10vw) }
+  100%{ transform: translateX(10vw) }
+}
+
+/* Silhouette pieces */
+.silhouette{
+  position:absolute;
+  bottom:8vh;
+  width:20vw;
+  max-width:320px;
+  min-width:160px;
+  height:auto;
+  z-index:1;
+  will-change:transform;
+  opacity:0.98;
+  /* small bob to mimic motion */
+  animation: bob 0.9s ease-in-out infinite;
+}
+
+/* Slight bobbing independent of travel */
+@keyframes bob{
+  0%{ transform: translateY(0) }
+  50%{ transform: translateY(-6px) }
+  100%{ transform: translateY(0) }
+}
+
+/* LTR instance: moves left -> right */
+.silhouette.ltr{
+  left:-40vw;
+  animation-name: ride-ltr, bob;
+  animation-duration: 12s, 0.9s;
+  animation-iteration-count: infinite, infinite;
+  animation-timing-function: linear, ease-in-out;
+  animation-fill-mode: forwards;
+  /* ensure both animations applied (two listed in shorthand) */
+}
+
+/* RTL instance: mirrored and delayed so it alternates */
+.silhouette.rtl{
+  left:120vw;
+  transform-origin: center;
+  transform: scaleX(-1);
+  animation-name: ride-rtl, bob;
+  animation-duration: 12s, 0.9s;
+  animation-iteration-count: infinite, infinite;
+  animation-timing-function: linear, ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 6s, 0s; /* start half-period later */
+}
+
+/* Travel keyframes move across a wide viewport (vw) so it works on all sizes */
+@keyframes ride-ltr{
+  0%{ transform: translateX(-40vw) scaleX(1) }
+  45%{ transform: translateX(48vw) scaleX(1) }
+  100%{ transform: translateX(140vw) scaleX(1) }
+}
+@keyframes ride-rtl{
+  0%{ transform: translateX(140vw) scaleX(-1) }
+  45%{ transform: translateX(48vw) scaleX(-1) }
+  100%{ transform: translateX(-40vw) scaleX(-1) }
+}
+
+/* Content sits above animated background */
+.content{
+  position:relative;
+  z-index:3;
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:5vh 20px;
+  text-align:center;
+}
+
+/* Header and socials */
+.site-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:3vh;
+}
+.site-header h1{
+  font-size:1.25rem;
+  margin:0;
+  letter-spacing:0.5px;
+}
+.socials a{
+  display:inline-block;
+  margin-left:10px;
+  padding:8px 10px;
+  color:var(--accent);
+  background:rgba(255,255,255,0.7);
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  transition:transform .15s ease, background .15s;
+}
+.socials a:hover{ transform:translateY(-3px); background:rgba(255,255,255,0.95); }
+
+/* Hero */
+.hero h2{ font-size:2rem; margin:0 0 0.25rem 0; }
+.hero p{ margin:0; opacity:0.9; }
+
+/* Footer */
+.site-footer{
+  position:relative;
+  z-index:3;
+  text-align:center;
+  padding:3vh 0;
+  color:rgba(0,0,0,0.6);
+}
+
+/* Make sure SVG scales and stays crisp */
+.silhouette svg{ display:block; width:100%; height:auto; }
+
+/* Accessibility: reduce motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .sun { animation: none; transform: translateX(-50%) translateY(-6vh); }
-  .cowboy { animation: none; left: 50%; transform: translateX(-50%); }
-  .cowboy { animation: none; left: 50%; transform: translateX(-50%) scaleX(1); }
+  .silhouette, .clouds { animation: none; transform:none; left: 10%; }
 }
