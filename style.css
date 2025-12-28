@@ -1,7 +1,8 @@
 /* style.css — Desperado SPL token Website
    - Orange/red sunset background
-   - Arizing sun
+   - Rising sun
    - Silhouetted cowboy on horse riding back-and-forth
+   - Header nav includes social links styling
 */
 
 :root{
@@ -9,7 +10,8 @@
   --bg-mid: #ff4e00;   /* deep orange */
   --bg-bottom: #8b0f00;/* dark red */
   --text: #111;
-  --muted: rgba(255,255,255,0.85);
+  --muted: rgba(255,255,255,0.92);
+  --nav-height: 64px;
 }
 
 *{box-sizing:border-box}
@@ -28,6 +30,7 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
   z-index:40;
   background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
   backdrop-filter: blur(4px);
+  height:var(--nav-height);
 }
 
 .site-header .brand h1{
@@ -37,7 +40,12 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-/* keep link placement (top-right) */
+/* main links and social links layout */
+.site-nav{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
 .site-nav ul{
   list-style:none;
   margin:0;
@@ -52,9 +60,12 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
   padding:6px 8px;
   border-radius:6px;
   font-weight:600;
-  opacity:.95;
+  opacity:.98;
 }
 .site-nav a:hover{background:rgba(255,255,255,0.06);}
+
+/* place social links slightly separated */
+.social-links{ margin-left:8px; gap:8px; }
 
 /* Hero / scene */
 .hero{
@@ -62,7 +73,7 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  padding-top:84px; /* leave space for header */
+  padding-top:var(--nav-height); /* leave space for header */
   position:relative;
   overflow:hidden;
   background:
@@ -94,7 +105,7 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
   opacity:0.95;
 }
 
-/* small slow shimmer for sun */
+/* sun animation */
 @keyframes sun-rise {
   0% { transform: translateX(-50%) translateY(60vh) scale(.9); opacity:0; }
   40% { opacity:1; }
@@ -185,7 +196,7 @@ html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Robo
   margin-top:40px;
 }
 
-/* Small screens: scale down rider and ensure nav stacks if needed */
+/* Small screens */
 @media (max-width:640px){
   .site-nav ul{gap:10px}
   .rider{ width:34vmax; }
