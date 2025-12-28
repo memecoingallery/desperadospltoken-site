@@ -42,6 +42,7 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
 .cowboy {
   position: absolute;
   bottom: 8vh;
+  left: -200px;
   width: 150px;
   height: 100px;
   z-index: 1;
@@ -52,24 +53,19 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
 
 @keyframes gallop {
   0% {
-    left: -200px;
-    transform: scaleX(1);
+    transform: translateX(0) scaleX(1);
   }
   45% {
-    left: calc(100% + 200px);
-    transform: scaleX(1);
+    transform: translateX(calc(100vw + 200px)) scaleX(1);
   }
   50% {
-    left: calc(100% + 200px);
-    transform: scaleX(-1);
+    transform: translateX(calc(100vw + 200px)) scaleX(-1);
   }
   95% {
-    left: -200px;
-    transform: scaleX(-1);
+    transform: translateX(0) scaleX(-1);
   }
   100% {
-    left: -200px;
-    transform: scaleX(1);
+    transform: translateX(0) scaleX(1);
   }
 }
 
@@ -202,5 +198,5 @@ html,body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-syste
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .sun { animation: none; transform: translateX(-50%) translateY(-6vh); }
-  .cowboy { animation: none; left: 50%; transform: translateX(-50%); }
+  .cowboy { animation: none; left: 50%; transform: translateX(-50%) scaleX(1); }
 }
