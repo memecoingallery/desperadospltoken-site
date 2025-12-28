@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <title>DESPERADO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="DESPERADO — a Solana SPL token for those with nothing left to lose." />
 
   <!-- Canonical URL -->
@@ -12,51 +12,30 @@
   <!-- Redirect non-www → www -->
   <script>
     if (location.hostname === "desperadospltoken.xyz") {
-      location.replace("https://www.desperadospltoken.xyz" + location.pathname);
+      location.replace("https://www.desperadospltoken.xyz" + location.pathname + location.search + location.hash);
     }
   </script>
 
   <link rel="stylesheet" href="style.css" />
-
-  <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Desperado SPL Token</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- full-screen sky & sun -->
-  <div class="sky">
-    <div class="sun" aria-hidden="true"></div>
+  <div class="sky" aria-hidden="true">
+    <div class="sun"></div>
   </div>
 
   <header class="site-header">
-    <!-- logo: put images/logo.svg in the images/ folder -->
     <a class="logo-link" href="/">
+      <!-- use the SVG logo (scalable & already in repo) -->
       <img src="images/logo.svg" alt="Desperado" class="logo" />
     </a>
     <h1 class="site-title">Desperado SPL Token</h1>
   </header>
 
-  <main class="content">
-    <p>Welcome to the Desperado SPL token site.</p>
-    <!-- your existing content goes here -->
-  </main>
-
-  <footer class="site-footer">
-    <small>© Desperado</small>
-  </footer>
-  
-</head>
-<body>
-
-  <main class="container">
-    <img src="images/logo.png"/>
-
+  <main class="content container">
+    <img src="images/logo.svg" alt="Desperado logo" style="display:none" />
     <h1>DESPERADO</h1>
-    <p class="tagline">
-      For those with nothing left to lose.
-    </p>
+    <p class="tagline">For those with nothing left to lose.</p>
 
     <div class="links">
       <a href="https://t.me/DESPERADO_Solana" target="_blank" rel="noopener">Telegram</a>
@@ -65,5 +44,8 @@
     </div>
   </main>
 
+  <footer class="site-footer">
+    <small>© Desperado</small>
+  </footer>
 </body>
 </html>
